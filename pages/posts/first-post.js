@@ -3,7 +3,17 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import Script from "next/script";
 
-export default function FirstPost() {
+export const getStaticProps = async (ctx) => {
+  return {
+    props: {
+      message: "testing the fetching data",
+      date: "09/19/2022",
+      name: "kamran",
+    },
+  };
+};
+
+export default function FirstPost(props) {
   return (
     <Layout>
       <>
@@ -18,11 +28,12 @@ export default function FirstPost() {
           }
         />
         <h1 className="underline text-red-300">First Post is op</h1>
-        <h2 className="underline text-red-400">
-          <Link href="/">
-            <a className="text-blue-400">Back to home!!!!</a>
-          </Link>
-        </h2>
+        <h1 className="text-green-800 no-underline">{props.date}</h1>
+        <h1 className="text-green-700 underline">{props.message}</h1>
+        <h1 className="text-green-700">{props.name}</h1>
+        <Link href="/">
+          <a className="text-blue-400">Back to home!!!!</a>
+        </Link>
       </>
     </Layout>
   );
